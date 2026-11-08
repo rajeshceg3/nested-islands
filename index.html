@@ -6,7 +6,7 @@
 <title>Islands All the Way Down</title>
 <meta name="description" content="A guided map tour of recursive geography: islands in lakes on islands in lakes, all the way down.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 <div id="map" aria-label="Satellite map. Drag and zoom to explore freely."></div>
@@ -31,8 +31,8 @@
   </div>
   <div class="cap-top">
     <span id="capChapter" class="cap-chapter"></span>
-    <span id="capLevel" class="cap-level"></span>
   </div>
+  <div id="chain" class="chain hidden" role="group" aria-label="Nesting chain, outermost to innermost. Tap a place to fly there."></div>
   <p id="capText" class="cap-text"></p>
   <div class="cap-controls">
     <button id="backBtn" class="btn ghost" aria-label="Previous step">&larr;</button>
@@ -82,7 +82,7 @@
 </div>
 
 <script src="vendor/leaflet.js"></script>
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 </body>
 <!-- deploy-probe: git-connected-pages 2026-11-08 -->
 </html>

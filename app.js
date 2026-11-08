@@ -43,63 +43,164 @@
   // "Recursive islands and lakes" catalogue; "largest"/"deepest" mean within
   // that catalogue. Rings mark real features smaller than a satellite pixel. ----
   var STEPS = [
-    { chapter: 'Prologue', level: '', center: [18, 8], zoom: 2,
-      text: 'Some islands have lakes. Some of those lakes have islands. This tour keeps going until it runs out of down.' },
+    { chapter: 'Prologue',
+      text: 'Some islands have lakes. Some of those lakes have islands. This tour keeps going until it runs out of down.',
+      center: [18, 8], zoom: 2 },
 
-    { chapter: '1 · Philippines', level: 'level 0', center: [13.6, 121.6], zoom: 7,
-      text: 'Luzon, a big island in the Philippines.' },
-    { chapter: '1 · Philippines', level: 'level 1', center: [13.95, 121.05], zoom: 10,
-      text: 'Inside Luzon: Taal Lake.' },
-    { chapter: '1 · Philippines', level: 'level 2', center: [14.01, 120.998], zoom: 12,
-      text: 'Inside the lake: Volcano Island. Yes, the lake has a volcano.' },
-    { chapter: '1 · Philippines', level: 'level 3', center: [14.0090, 120.9975], zoom: 14,
-      compare: true, ring: [14.00972, 120.99833],
-      text: 'Inside the volcano, in the 2016 mosaic: a crater lake holding a rocky islet, Vulcan Point, ringed here - it spans just a few satellite pixels. An island in a lake on an island in a lake on an island.' },
-    { chapter: '1 · Philippines', level: 'time check', center: [14.0090, 120.9975], zoom: 14,
-      compare: true, src: 'eox2021', ring: [14.00972, 120.99833],
-      text: 'Same crater, 2021 mosaic: the January 2020 eruption stripped the island bare and the crater lake vanished. Vulcan Point survived as bare rock, and rain has pooled back around it. Mosaics are year blends, not today\u2019s photo - but the change is real.' },
+    { chapter: '1 \u00b7 Philippines',
+      text: 'Luzon, a big island in the Philippines.',
+      center: [13.6, 121.6], zoom: 7,
+      chain: [
+        { n: 'Luzon', c: [13.6, 121.6], z: 7 } ] },
+    { chapter: '1 \u00b7 Philippines',
+      text: 'Inside Luzon: Taal Lake.',
+      center: [13.95, 121.05], zoom: 10,
+      chain: [
+        { n: 'Luzon', c: [13.6, 121.6], z: 7 },
+        { n: 'Taal Lake', c: [13.95, 121.05], z: 10 } ] },
+    { chapter: '1 \u00b7 Philippines',
+      text: 'Inside the lake: Volcano Island. Yes, the lake has a volcano.',
+      center: [14.01, 120.998], zoom: 12,
+      chain: [
+        { n: 'Luzon', c: [13.6, 121.6], z: 7 },
+        { n: 'Taal Lake', c: [13.95, 121.05], z: 10 },
+        { n: 'Volcano Island', c: [14.01, 120.998], z: 12 } ] },
+    { chapter: '1 \u00b7 Philippines', compare: true, ring: [14.00972, 120.99833],
+      text: 'Inside the volcano, in the 2016 mosaic: a crater lake holding a rocky islet, Vulcan Point, ringed here - it spans just a few satellite pixels. An island in a lake on an island in a lake on an island.',
+      center: [14.0090, 120.9975], zoom: 14,
+      chain: [
+        { n: 'Luzon', c: [13.6, 121.6], z: 7 },
+        { n: 'Taal Lake', c: [13.95, 121.05], z: 10 },
+        { n: 'Volcano Island', c: [14.01, 120.998], z: 12 },
+        { n: 'Crater Lake', c: [14.0090, 120.9975], z: 14 },
+        { n: 'Vulcan Point', c: [14.00972, 120.99833], z: 15.5 } ] },
+    { chapter: '1 \u00b7 Philippines', compare: true, src: 'eox2021', ring: [14.00972, 120.99833],
+      text: 'Same crater, 2021 mosaic: the January 2020 eruption stripped the island bare and the crater lake vanished. Vulcan Point survived as bare rock, and rain has pooled back around it. Mosaics are year blends, not today\u2019s photo - but the change is real.',
+      center: [14.0090, 120.9975], zoom: 14,
+      chain: [
+        { n: 'Luzon', c: [13.6, 121.6], z: 7 },
+        { n: 'Taal Lake', c: [13.95, 121.05], z: 10 },
+        { n: 'Volcano Island', c: [14.01, 120.998], z: 12 },
+        { n: 'Crater Lake', c: [14.0090, 120.9975], z: 14 },
+        { n: 'Vulcan Point', c: [14.00972, 120.99833], z: 15.5 } ] },
 
-    { chapter: '2 · Canada', level: 'the far north', center: [68, -105], zoom: 4,
-      text: 'Far north: Victoria Island, an Arctic island bigger than Great Britain.' },
-    { chapter: '2 · Canada', level: 'unnamed', center: [69.75, -108.3], zoom: 10,
-      text: 'On it, a lake nobody named. In the lake, an island nobody named. In that island...' },
-    { chapter: '2 · Canada', level: 'level 3', center: [69.79222, -108.24056], zoom: 13,
-      ring: [69.79222, -108.24056],
-      text: '...one more lake, holding the ringed spot: the largest third-order island in the catalogue. It has no official name. People online call it Inception Island.' },
+    { chapter: '2 \u00b7 Canada',
+      text: 'Far north: Victoria Island, an Arctic island bigger than Great Britain.',
+      center: [68, -105], zoom: 4,
+      chain: [
+        { n: 'Victoria Island', c: [68, -105], z: 4 } ] },
+    { chapter: '2 \u00b7 Canada',
+      text: 'On it, a lake nobody named. In the lake, an island nobody named. In that island...',
+      center: [69.75, -108.3], zoom: 10,
+      chain: [
+        { n: 'Victoria Island', c: [68, -105], z: 4 },
+        { n: 'a nameless lake', c: [69.75, -108.3], z: 9.5 },
+        { n: 'a nameless island', c: [69.79, -108.26], z: 11 } ] },
+    { chapter: '2 \u00b7 Canada', ring: [69.79222, -108.24056],
+      text: '...one more lake, holding the ringed spot: the largest third-order island in the catalogue. It has no official name. People online call it Inception Island.',
+      center: [69.79222, -108.24056], zoom: 13,
+      chain: [
+        { n: 'Victoria Island', c: [68, -105], z: 4 },
+        { n: 'a nameless lake', c: [69.75, -108.3], z: 9.5 },
+        { n: 'a nameless island', c: [69.79, -108.26], z: 11 },
+        { n: 'one more lake', c: [69.792, -108.243], z: 12.5 },
+        { n: '\u201cInception\u201d', c: [69.79222, -108.24056], z: 14 } ] },
 
-    { chapter: '3 · Indonesia', level: 'level 0', center: [0.5, 100.5], zoom: 7,
-      text: 'Sumatra, Indonesia.' },
-    { chapter: '3 · Indonesia', level: 'level 1', center: [2.6, 98.8], zoom: 10,
-      text: 'Lake Toba: the flooded caldera of a supervolcano.' },
-    { chapter: '3 · Indonesia', level: 'level 2', center: [2.60, 98.85], zoom: 12,
-      text: 'In it: Samosir, an island nearly the size of Singapore - the biggest island-in-a-lake in the catalogue, with an asterisk: a canal finished the job.' },
-    { chapter: '3 · Indonesia', level: 'level 3', center: [2.56444, 98.88333], zoom: 14,
-      ring: [2.56444, 98.88333],
-      text: 'And on Samosir, ponds. The ringed one, Aek Natonang, holds two small islets. Down one more level.' },
+    { chapter: '3 \u00b7 Indonesia',
+      text: 'Sumatra, Indonesia.',
+      center: [0.5, 100.5], zoom: 7,
+      chain: [
+        { n: 'Sumatra', c: [0.5, 100.5], z: 7 } ] },
+    { chapter: '3 \u00b7 Indonesia',
+      text: 'Lake Toba: the flooded caldera of a supervolcano.',
+      center: [2.6, 98.8], zoom: 10,
+      chain: [
+        { n: 'Sumatra', c: [0.5, 100.5], z: 7 },
+        { n: 'Lake Toba', c: [2.6, 98.8], z: 10 } ] },
+    { chapter: '3 \u00b7 Indonesia',
+      text: 'In it: Samosir, an island nearly the size of Singapore - the biggest island-in-a-lake in the catalogue, with an asterisk: a canal finished the job.',
+      center: [2.60, 98.85], zoom: 12,
+      chain: [
+        { n: 'Sumatra', c: [0.5, 100.5], z: 7 },
+        { n: 'Lake Toba', c: [2.6, 98.8], z: 10 },
+        { n: 'Samosir', c: [2.60, 98.85], z: 12 } ] },
+    { chapter: '3 \u00b7 Indonesia', ring: [2.56444, 98.88333],
+      text: 'And on Samosir, ponds. The ringed one, Aek Natonang, holds two small islets. Down one more level.',
+      center: [2.56444, 98.88333], zoom: 14,
+      chain: [
+        { n: 'Sumatra', c: [0.5, 100.5], z: 7 },
+        { n: 'Lake Toba', c: [2.6, 98.8], z: 10 },
+        { n: 'Samosir', c: [2.60, 98.85], z: 12 },
+        { n: 'Aek Natonang', c: [2.56444, 98.88333], z: 14 },
+        { n: 'two islets', c: [2.56444, 98.88333], z: 15 } ] },
 
-    { chapter: '4 · USA', level: 'level 1', center: [47.4, -87.5], zoom: 7,
-      text: 'Lake Superior: the largest freshwater lake on Earth by surface area.' },
-    { chapter: '4 · USA', level: 'level 2', center: [48.0, -88.9], zoom: 10,
-      text: 'In it: Isle Royale, a wilderness island with no roads and no permanent residents - just wolves and moose.' },
-    { chapter: '4 · USA', level: 'level 3', center: [48.03, -88.76], zoom: 12,
-      text: 'On Isle Royale: Siskiwit Lake.' },
-    { chapter: '4 · USA', level: 'level 4', center: [48.01000, -88.77083], zoom: 16, src: 'usgs',
-      text: 'In Siskiwit Lake: Ryan Island. An island in a lake, on an island, in a lake. (This stop uses sharper USGS public-domain imagery - the others use 10 m Sentinel-2.)' },
-    { chapter: '4 · USA', level: 'the hoax', center: [48.00500, -88.76800], zoom: 15, src: 'usgs',
-      text: 'A beloved book claimed one more level here - a boulder off Ryan Island\u2019s shore, making it five deep. A mother and son paddled out in 2019 to check. It was not there. Wonderful stories still need checking.' },
+    { chapter: '4 \u00b7 USA',
+      text: 'Lake Superior: the largest freshwater lake on Earth by surface area.',
+      center: [47.4, -87.5], zoom: 7,
+      chain: [
+        { n: 'Lake Superior', c: [47.4, -87.5], z: 7 } ] },
+    { chapter: '4 \u00b7 USA',
+      text: 'In it: Isle Royale, a wilderness island with no roads and no permanent residents - just wolves and moose.',
+      center: [48.0, -88.9], zoom: 10,
+      chain: [
+        { n: 'Lake Superior', c: [47.4, -87.5], z: 7 },
+        { n: 'Isle Royale', c: [48.0, -88.9], z: 10 } ] },
+    { chapter: '4 \u00b7 USA',
+      text: 'On Isle Royale: Siskiwit Lake.',
+      center: [48.03, -88.76], zoom: 12,
+      chain: [
+        { n: 'Lake Superior', c: [47.4, -87.5], z: 7 },
+        { n: 'Isle Royale', c: [48.0, -88.9], z: 10 },
+        { n: 'Siskiwit Lake', c: [48.03, -88.76], z: 12 } ] },
+    { chapter: '4 \u00b7 USA', src: 'usgs',
+      text: 'In Siskiwit Lake: Ryan Island. An island in a lake, on an island, in a lake. (This stop uses sharper USGS public-domain imagery - the others use 10 m Sentinel-2.)',
+      center: [48.01000, -88.77083], zoom: 16,
+      chain: [
+        { n: 'Lake Superior', c: [47.4, -87.5], z: 7, src: 'eox2016' },
+        { n: 'Isle Royale', c: [48.0, -88.9], z: 10, src: 'eox2016' },
+        { n: 'Siskiwit Lake', c: [48.03, -88.76], z: 12, src: 'eox2016' },
+        { n: 'Ryan Island', c: [48.01000, -88.77083], z: 16, src: 'usgs' } ] },
+    { chapter: '4 \u00b7 USA', src: 'usgs',
+      text: 'A beloved book claimed one more level here - a boulder off Ryan Island\u2019s shore, making it five deep. A mother and son paddled out in 2019 to check. It was not there. Wonderful stories still need checking.',
+      center: [48.00500, -88.76800], zoom: 15,
+      chain: [
+        { n: 'Lake Superior', c: [47.4, -87.5], z: 7, src: 'eox2016' },
+        { n: 'Isle Royale', c: [48.0, -88.9], z: 10, src: 'eox2016' },
+        { n: 'Siskiwit Lake', c: [48.03, -88.76], z: 12, src: 'eox2016' },
+        { n: 'Ryan Island', c: [48.01000, -88.77083], z: 16, src: 'usgs' },
+        { n: 'Moose Boulder', dead: true } ] },
 
-    { chapter: '5 · Canada', level: 'the deepest', center: [63, -98], zoom: 5,
-      text: 'Back to the Canadian north, for the deepest nesting in the catalogue.' },
-    { chapter: '5 · Canada', level: 'lake yathkyed', center: [62.75, -97.9], zoom: 10,
-      text: 'Lake Yathkyed, Nunavut. Inside it: an island.' },
-    { chapter: '5 · Canada', level: 'five down', center: [62.65139, -97.78750], zoom: 13,
-      text: 'On that island: a lake. In that lake: an island. In that island: another small lake...' },
-    { chapter: '5 · Canada', level: 'level 5', center: [62.65139, -97.78750], zoom: 14,
-      ring: [62.65139, -97.78750],
-      text: '...holding an islet, ringed. Five levels of down - the deepest island-in-a-lake chain in the catalogue.' },
+    { chapter: '5 \u00b7 Canada',
+      text: 'Back to the Canadian north, for the deepest nesting in the catalogue.',
+      center: [63, -98], zoom: 5 },
+    { chapter: '5 \u00b7 Canada',
+      text: 'Lake Yathkyed, Nunavut. Inside it: an island.',
+      center: [62.75, -97.9], zoom: 10,
+      chain: [
+        { n: 'Lake Yathkyed', c: [62.75, -97.9], z: 10 } ] },
+    { chapter: '5 \u00b7 Canada',
+      text: 'On that island: a lake. In that lake: an island. In that island: another small lake...',
+      center: [62.65139, -97.78750], zoom: 13,
+      chain: [
+        { n: 'Lake Yathkyed', c: [62.75, -97.9], z: 10 },
+        { n: 'an island', c: [62.66, -97.80], z: 11 },
+        { n: 'a lake', c: [62.655, -97.792], z: 12.5 },
+        { n: 'an island', c: [62.65139, -97.78750], z: 13 },
+        { n: 'a small lake', c: [62.65139, -97.78750], z: 14 } ] },
+    { chapter: '5 \u00b7 Canada', ring: [62.65139, -97.78750],
+      text: '...holding an islet, ringed. Five levels of down - the deepest island-in-a-lake chain in the catalogue.',
+      center: [62.65139, -97.78750], zoom: 14,
+      chain: [
+        { n: 'Lake Yathkyed', c: [62.75, -97.9], z: 10 },
+        { n: 'an island', c: [62.66, -97.80], z: 11 },
+        { n: 'a lake', c: [62.655, -97.792], z: 12.5 },
+        { n: 'an island', c: [62.65139, -97.78750], z: 13 },
+        { n: 'a small lake', c: [62.65139, -97.78750], z: 14 },
+        { n: 'the islet', c: [62.65139, -97.78750], z: 15 } ] },
 
-    { chapter: 'Epilogue', level: '', center: [25, -30], zoom: 2,
-      text: 'Geography is stranger than it needs to be. Every stop follows the recursive-islands catalogue - the \u24d8 button has the sources. The map is yours now: wander.' }
+    { chapter: 'Epilogue',
+      text: 'Geography is stranger than it needs to be. Every stop follows the recursive-islands catalogue - the \u24d8 button has the sources. The map is yours now: wander.',
+      center: [25, -30], zoom: 2 }
   ];
 
   // ---- state ----
@@ -111,7 +212,7 @@
   var introEl = document.getElementById('intro');
   var capEl = document.getElementById('caption');
   var capChapter = document.getElementById('capChapter');
-  var capLevel = document.getElementById('capLevel');
+  var chainEl = document.getElementById('chain');
   var capText = document.getElementById('capText');
   var dotsEl = document.getElementById('dots');
   var nextBtn = document.getElementById('nextBtn');
@@ -134,13 +235,81 @@
     map.flyTo(center, zoom, { duration: 1.7 });
   }
 
+  var pulseMarker = null;
   function updateRing(s) {
     if (ringMarker) { map.removeLayer(ringMarker); ringMarker = null; }
+    if (pulseMarker) { map.removeLayer(pulseMarker); pulseMarker = null; }
     if (s.ring) {
       ringMarker = L.circleMarker(s.ring, {
         radius: 13, color: '#ffd166', weight: 2.5, fill: false, opacity: 0.95,
         interactive: false
       }).addTo(map);
+      // one expanding pulse on arrival so the eye finds the sub-pixel feature
+      if (!reducedMotion) {
+        var t0 = null;
+        pulseMarker = L.circleMarker(s.ring, {
+          radius: 13, color: '#ffd166', weight: 2, fill: false, opacity: 0.9,
+          interactive: false
+        }).addTo(map);
+        var stepFn = function (ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          var ease = 1 - Math.pow(1 - p, 3);
+          pulseMarker.setRadius(13 + ease * 30);
+          pulseMarker.setStyle({ opacity: 0.9 * (1 - ease) });
+          if (p < 1 && pulseMarker) requestAnimationFrame(stepFn);
+          else if (pulseMarker) { map.removeLayer(pulseMarker); pulseMarker = null; }
+        };
+        setTimeout(function () { if (pulseMarker) requestAnimationFrame(stepFn); }, reducedMotion ? 0 : 1400);
+      }
+    }
+  }
+
+  // ---- nesting chain: the recursion made visible and tappable ----
+  function renderChain(s) {
+    chainEl.innerHTML = '';
+    var chain = s.chain;
+    chainEl.classList.toggle('hidden', !chain || !chain.length);
+    if (!chain || !chain.length) return;
+    chain.forEach(function (el, i) {
+      if (i > 0) {
+        var sep = document.createElement('span');
+        sep.className = 'chain-sep';
+        sep.textContent = '\u203a';
+        sep.setAttribute('aria-hidden', 'true');
+        chainEl.appendChild(sep);
+      }
+      var node;
+      if (el.dead) {
+        node = document.createElement('span');
+        node.className = 'chain-node dead';
+        node.title = 'Claimed, checked in 2019, not there';
+        node.textContent = el.n;
+      } else if (i === chain.length - 1) {
+        node = document.createElement('span');
+        node.className = 'chain-node here';
+        node.setAttribute('aria-current', 'location');
+        node.textContent = el.n;
+      } else {
+        node = document.createElement('button');
+        node.type = 'button';
+        node.className = 'chain-node';
+        node.textContent = el.n;
+        node.setAttribute('aria-label', 'Fly out to ' + el.n);
+        (function (target) {
+          node.addEventListener('click', function () {
+            if (flying) return;
+            setLayer(target.src || s.src || 'eox2016');
+            updateVintage(s);
+            fly(target.c, target.z);
+          });
+        })(el);
+      }
+      chainEl.appendChild(node);
+    });
+    var last = chainEl.lastElementChild;
+    if (last && last.scrollIntoView) {
+      try { chainEl.scrollLeft = chainEl.scrollWidth; } catch (e) {}
     }
   }
 
@@ -155,7 +324,7 @@
     if (idx < 0) return;
     var s = STEPS[idx];
     capChapter.textContent = s.chapter;
-    capLevel.textContent = s.level;
+    renderChain(s);
     capText.textContent = s.text;
     dotsEl.textContent = (idx + 1) + ' / ' + STEPS.length;
     backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
