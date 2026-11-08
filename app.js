@@ -57,7 +57,7 @@
       text: 'Inside the volcano, in the 2016 mosaic: a crater lake holding a rocky islet, Vulcan Point, ringed here - it spans just a few satellite pixels. An island in a lake on an island in a lake on an island.' },
     { chapter: '1 · Philippines', level: 'time check', center: [14.0090, 120.9975], zoom: 14,
       compare: true, src: 'eox2021', ring: [14.00972, 120.99833],
-      text: 'Same crater, 2021 mosaic: the January 2020 eruption stripped the island bare, and the old lake and its islet are gone - a young pool sits in their place. Mosaics are year blends, not today\u2019s photo, but the change is real.' },
+      text: 'Same crater, 2021 mosaic: the January 2020 eruption stripped the island bare and the crater lake vanished. Vulcan Point survived as bare rock, and rain has pooled back around it. Mosaics are year blends, not today\u2019s photo - but the change is real.' },
 
     { chapter: '2 · Canada', level: 'the far north', center: [68, -105], zoom: 4,
       text: 'Far north: Victoria Island, an Arctic island bigger than Great Britain.' },
