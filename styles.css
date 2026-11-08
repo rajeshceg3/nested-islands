@@ -112,6 +112,10 @@ button.chain-node:active { transform: scale(0.93); }
   background: transparent; border-style: dashed; color: var(--ink-soft);
   text-decoration: line-through; cursor: default; opacity: 0.75;
 }
+.chain-node.dead.here {
+  background: transparent; color: var(--ink); border-color: var(--accent);
+  text-decoration: line-through; opacity: 0.9;
+}
 .chain-sep { color: var(--ink-soft); font-size: 11px; opacity: 0.6; flex: 0 0 auto; }
 .cap-text {
   font-size: 16.5px; line-height: 1.45; margin: 6px 0 10px;

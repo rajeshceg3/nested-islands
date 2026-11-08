@@ -282,7 +282,7 @@
       var node;
       if (el.dead) {
         node = document.createElement('span');
-        node.className = 'chain-node dead';
+        node.className = i === chain.length - 1 ? 'chain-node dead here' : 'chain-node dead';
         node.title = 'Claimed, checked in 2019, not there';
         node.textContent = el.n;
       } else if (i === chain.length - 1) {
