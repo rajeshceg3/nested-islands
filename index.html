@@ -6,7 +6,7 @@
 <title>Islands All the Way Down</title>
 <meta name="description" content="A guided map tour of recursive geography: islands in lakes on islands in lakes, all the way down.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 <div id="map" aria-label="Satellite map. Drag and zoom to explore freely."></div>
@@ -17,7 +17,6 @@
 
 <div id="intro" class="overlay">
   <div class="card intro-card">
-    <p class="kicker">a map tour</p>
     <h1>Islands all<br>the way down</h1>
     <p class="lede">An island in a lake, on an island, in a lake, on an island. Real places, seen from space, one level deeper each step.</p>
     <button id="beginBtn" class="btn primary">Begin the descent</button>
@@ -26,6 +25,10 @@
 </div>
 
 <div id="caption" class="caption hidden" role="status" aria-live="polite">
+  <div id="vintage" class="vintage hidden" role="group" aria-label="Imagery year">
+    <button class="vchip" data-src="eox2016">2016 mosaic</button>
+    <button class="vchip" data-src="eox2021">2021 mosaic</button>
+  </div>
   <div class="cap-top">
     <span id="capChapter" class="cap-chapter"></span>
     <span id="capLevel" class="cap-level"></span>
@@ -33,7 +36,7 @@
   <p id="capText" class="cap-text"></p>
   <div class="cap-controls">
     <button id="backBtn" class="btn ghost" aria-label="Previous step">&larr;</button>
-    <div id="dots" class="dots" aria-hidden="true"></div>
+    <div id="dots" class="dots fraction" aria-hidden="true"></div>
     <button id="nextBtn" class="btn primary">Next &darr;</button>
   </div>
 </div>
@@ -59,7 +62,8 @@
 <div id="sources" class="overlay hidden">
   <div class="card src-card">
     <h2>Sources &amp; notes</h2>
-    <p class="src-note">Chains and coordinates follow Wikipedia's “Recursive islands and lakes” list, cross-checked against the sources below. Satellite imagery: Esri World Imagery. “Largest” means largest catalogued so far, not a proven record.</p>
+    <p class="src-note">Chains and coordinates follow Wikipedia's "Recursive islands and lakes" catalogue, cross-checked against the sources below. "Largest" and "deepest" mean within that community-maintained catalogue, not a surveyed record.</p>
+    <p class="src-note">Satellite imagery: EOxCloudless Sentinel-2 mosaics by EOX (2016 and 2021 vintages, labeled on screen) and, for the US stop, USGS The National Map (public domain). Mosaics are blends of a year's passes, not a photo of today.</p>
     <ul>
       <li><a href="https://en.wikipedia.org/wiki/Recursive_islands_and_lakes" target="_blank" rel="noopener">Recursive islands and lakes (Wikipedia)</a></li>
       <li><a href="https://www.iflscience.com/vulcan-point-the-island-in-a-lake-on-an-island-in-a-lake-on-an-island-67268" target="_blank" rel="noopener">Vulcan Point (IFLScience)</a></li>
@@ -67,13 +71,15 @@
       <li><a href="https://www.atlasobscura.com/articles/moose-boulder-debunked" target="_blank" rel="noopener">The Moose Boulder hoax (Atlas Obscura)</a></li>
       <li><a href="https://www.npr.org/2020/03/13/815546895/the-lonely-non-island-unfortunately-moose-boulder-doesnt-exist" target="_blank" rel="noopener">Moose Boulder debunked (NPR)</a></li>
       <li><a href="https://en.wikipedia.org/wiki/Lake_Sidihoni" target="_blank" rel="noopener">Lake Sidihoni (Wikipedia)</a></li>
+      <li><a href="https://cloudless.eox.at/" target="_blank" rel="noopener">EOxCloudless imagery (EOX)</a></li>
+      <li><a href="https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map" target="_blank" rel="noopener">USGS The National Map terms</a></li>
     </ul>
-    <p class="src-note">Taal's crater changed in the January 2020 eruption; that chapter says so on the map. Nothing here is stored; the tour is the whole app.</p>
+    <p class="src-note">Taal's crater changed in the January 2020 eruption; that chapter compares the 2016 and 2021 mosaics on the map. Nothing here is stored; the tour is the whole app.</p>
     <button id="srcClose" class="btn primary">Back to the map</button>
   </div>
 </div>
 
 <script src="vendor/leaflet.js"></script>
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
