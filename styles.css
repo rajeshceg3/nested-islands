@@ -132,7 +132,7 @@ button.rail-name:active { transform: scale(0.94); }
 
 .peek-back {
   position: fixed; z-index: 30;
-  top: calc(max(14px, env(safe-area-inset-top)) + 8px); left: 50%;
+  top: calc(max(14px, env(safe-area-inset-top)) + 58px); left: 50%;
   transform: translateX(-50%);
   min-height: 40px; padding: 9px 18px;
   border: 0; border-radius: 999px; cursor: pointer;
