@@ -94,15 +94,15 @@
       center: [69.75, -108.3], zoom: 10,
       chain: [
         { n: 'Victoria Island', c: [68, -105], z: 4 },
-        { n: 'a nameless lake', c: [69.75, -108.3], z: 9.5 },
-        { n: 'a nameless island', c: [69.79, -108.26], z: 11 } ] },
+        { n: 'nameless lake', c: [69.75, -108.3], z: 9.5 },
+        { n: 'nameless island', c: [69.79, -108.26], z: 11 } ] },
     { chapter: '2 \u00b7 Canada', ring: [69.79222, -108.24056],
       text: '...one more lake, holding the ringed spot: the largest third-order island in the catalogue. It has no official name. People online call it Inception Island.',
       center: [69.79222, -108.24056], zoom: 13,
       chain: [
         { n: 'Victoria Island', c: [68, -105], z: 4 },
-        { n: 'a nameless lake', c: [69.75, -108.3], z: 9.5 },
-        { n: 'a nameless island', c: [69.79, -108.26], z: 11 },
+        { n: 'nameless lake', c: [69.75, -108.3], z: 9.5 },
+        { n: 'nameless island', c: [69.79, -108.26], z: 11 },
         { n: 'one more lake', c: [69.792, -108.243], z: 12.5 },
         { n: '\u201cInception\u201d', c: [69.79222, -108.24056], z: 14 } ] },
 
@@ -183,20 +183,20 @@
       center: [62.65139, -97.78750], zoom: 13,
       chain: [
         { n: 'Lake Yathkyed', c: [62.75, -97.9], z: 10 },
-        { n: 'an island', c: [62.66, -97.80], z: 11 },
-        { n: 'a lake', c: [62.655, -97.792], z: 12.5 },
-        { n: 'an island', c: [62.65139, -97.78750], z: 13 },
-        { n: 'a small lake', c: [62.65139, -97.78750], z: 14 } ] },
+        { n: 'island', c: [62.66, -97.80], z: 11 },
+        { n: 'lake', c: [62.655, -97.792], z: 12.5 },
+        { n: 'island', c: [62.65139, -97.78750], z: 13 },
+        { n: 'small lake', c: [62.65139, -97.78750], z: 14 } ] },
     { chapter: '5 \u00b7 Canada', ring: [62.65139, -97.78750],
       text: '...holding an islet, ringed. Five levels of down - the deepest island-in-a-lake chain in the catalogue.',
       center: [62.65139, -97.78750], zoom: 14,
       chain: [
         { n: 'Lake Yathkyed', c: [62.75, -97.9], z: 10 },
-        { n: 'an island', c: [62.66, -97.80], z: 11 },
-        { n: 'a lake', c: [62.655, -97.792], z: 12.5 },
-        { n: 'an island', c: [62.65139, -97.78750], z: 13 },
-        { n: 'a small lake', c: [62.65139, -97.78750], z: 14 },
-        { n: 'the islet', c: [62.65139, -97.78750], z: 15 } ] },
+        { n: 'island', c: [62.66, -97.80], z: 11 },
+        { n: 'lake', c: [62.655, -97.792], z: 12.5 },
+        { n: 'island', c: [62.65139, -97.78750], z: 13 },
+        { n: 'small lake', c: [62.65139, -97.78750], z: 14 },
+        { n: 'islet', c: [62.65139, -97.78750], z: 15 } ] },
 
     { chapter: 'Epilogue',
       text: 'Geography is stranger than it needs to be. Every stop follows the recursive-islands catalogue - the \u24d8 button has the sources. The map is yours now: wander.',
@@ -212,7 +212,8 @@
   var introEl = document.getElementById('intro');
   var capEl = document.getElementById('caption');
   var capChapter = document.getElementById('capChapter');
-  var chainEl = document.getElementById('chain');
+  var railEl = document.getElementById('depthRail');
+  var peekBackBtn = document.getElementById('peekBack');
   var capText = document.getElementById('capText');
   var dotsEl = document.getElementById('dots');
   var nextBtn = document.getElementById('nextBtn');
@@ -265,53 +266,78 @@
     }
   }
 
-  // ---- nesting chain: the recursion made visible and tappable ----
-  function renderChain(s) {
-    chainEl.innerHTML = '';
+  // ---- depth rail: every level of the nesting, outermost at the top,
+  // always fully visible. Tapping a level flies the map out to it (a peek);
+  // an explicit return chip flies back to the tour's current level. ----
+  var peek = null; // {name} while the map shows an ancestor instead of the current level
+
+  function clearPeek() {
+    peek = null;
+    peekBackBtn.classList.add('hidden');
+    var v = railEl.querySelector('.rail-row.viewing');
+    if (v) v.classList.remove('viewing');
+  }
+
+  function renderRail(s) {
+    railEl.innerHTML = '';
     var chain = s.chain;
-    chainEl.classList.toggle('hidden', !chain || !chain.length);
+    railEl.classList.toggle('hidden', !chain || !chain.length);
     if (!chain || !chain.length) return;
     chain.forEach(function (el, i) {
-      if (i > 0) {
-        var sep = document.createElement('span');
-        sep.className = 'chain-sep';
-        sep.textContent = '\u203a';
-        sep.setAttribute('aria-hidden', 'true');
-        chainEl.appendChild(sep);
-      }
+      var last = i === chain.length - 1;
+      var row = document.createElement('div');
+      row.className = 'rail-row';
+      var dot = document.createElement('span');
+      dot.className = 'rail-dot';
+      dot.setAttribute('aria-hidden', 'true');
+      row.appendChild(dot);
       var node;
       if (el.dead) {
         node = document.createElement('span');
-        node.className = i === chain.length - 1 ? 'chain-node dead here' : 'chain-node dead';
+        node.className = 'rail-name dead';
         node.title = 'Claimed, checked in 2019, not there';
         node.textContent = el.n;
-      } else if (i === chain.length - 1) {
+        row.classList.add('is-dead');
+        if (last) row.classList.add('here');
+      } else if (last) {
         node = document.createElement('span');
-        node.className = 'chain-node here';
+        node.className = 'rail-name';
         node.setAttribute('aria-current', 'location');
         node.textContent = el.n;
+        row.classList.add('here');
       } else {
         node = document.createElement('button');
         node.type = 'button';
-        node.className = 'chain-node';
+        node.className = 'rail-name';
         node.textContent = el.n;
         node.setAttribute('aria-label', 'Fly out to ' + el.n);
-        (function (target) {
+        (function (target, rowEl) {
           node.addEventListener('click', function () {
             if (flying) return;
+            clearPeek();
+            peek = { name: target.n };
+            rowEl.classList.add('viewing');
+            peekBackBtn.textContent = '\u2193 Back to ' + chain[chain.length - 1].n;
+            peekBackBtn.classList.remove('hidden');
             setLayer(target.src || s.src || 'eox2016');
             updateVintage(s);
             fly(target.c, target.z);
           });
-        })(el);
+        })(el, row);
       }
-      chainEl.appendChild(node);
+      row.appendChild(node);
+      railEl.appendChild(row);
     });
-    var last = chainEl.lastElementChild;
-    if (last && last.scrollIntoView) {
-      try { chainEl.scrollLeft = chainEl.scrollWidth; } catch (e) {}
-    }
   }
+
+  peekBackBtn.addEventListener('click', function () {
+    if (flying || idx < 0) return;
+    var s = STEPS[idx];
+    clearPeek();
+    setLayer(s.src || 'eox2016');
+    updateVintage(s);
+    fly(s.center, s.zoom);
+  });
 
   function updateVintage(s) {
     vintageEl.classList.toggle('hidden', !s.compare);
@@ -324,7 +350,7 @@
     if (idx < 0) return;
     var s = STEPS[idx];
     capChapter.textContent = s.chapter;
-    renderChain(s);
+    renderRail(s);
     capText.textContent = s.text;
     dotsEl.textContent = (idx + 1) + ' / ' + STEPS.length;
     backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
@@ -334,6 +360,7 @@
   function go(n) {
     idx = Math.max(0, Math.min(STEPS.length - 1, n));
     exploring = false;
+    clearPeek();
     resumeBtn.classList.add('hidden');
     capEl.classList.remove('hidden');
     var s = STEPS[idx];
@@ -363,6 +390,8 @@
   map.on('dragstart zoomstart', function () {
     if (flying || idx < 0) return;
     exploring = true;
+    clearPeek();
+    railEl.classList.add('hidden');
     capEl.classList.add('hidden');
     vintageEl.classList.add('hidden');
     resumeBtn.classList.remove('hidden');

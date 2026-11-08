@@ -6,10 +6,13 @@
 <title>Islands All the Way Down</title>
 <meta name="description" content="A guided map tour of recursive geography: islands in lakes on islands in lakes, all the way down.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <div id="map" aria-label="Satellite map. Drag and zoom to explore freely."></div>
+
+<nav id="depthRail" class="rail hidden" aria-label="How deep you are: each row is one level of nesting, outermost at the top. Tap a level to fly out to it."></nav>
+<button id="peekBack" class="peek-back hidden" type="button"></button>
 
 <header id="brand">
   <span class="brand-title">islands all the way down</span>
@@ -32,7 +35,6 @@
   <div class="cap-top">
     <span id="capChapter" class="cap-chapter"></span>
   </div>
-  <div id="chain" class="chain hidden" role="group" aria-label="Nesting chain, outermost to innermost. Tap a place to fly there."></div>
   <p id="capText" class="cap-text"></p>
   <div class="cap-controls">
     <button id="backBtn" class="btn ghost" aria-label="Previous step">&larr;</button>
@@ -82,7 +84,7 @@
 </div>
 
 <script src="vendor/leaflet.js"></script>
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 <!-- deploy-probe: git-connected-pages 2026-11-08 -->
 </html>
