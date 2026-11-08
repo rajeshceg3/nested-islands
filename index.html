@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Islands All the Way Down</title>
+<meta name="description" content="A guided map tour of recursive geography: islands in lakes on islands in lakes, all the way down.">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+<div id="map" aria-label="Satellite map. Drag and zoom to explore freely."></div>
+
+<header id="brand">
+  <span class="brand-title">islands all the way down</span>
+</header>
+
+<div id="intro" class="overlay">
+  <div class="card intro-card">
+    <p class="kicker">a map tour</p>
+    <h1>Islands all<br>the way down</h1>
+    <p class="lede">An island in a lake, on an island, in a lake, on an island. Real places, seen from space, one level deeper each step.</p>
+    <button id="beginBtn" class="btn primary">Begin the descent</button>
+    <p class="hint-line">The map stays yours: pan and zoom any time.</p>
+  </div>
+</div>
+
+<div id="caption" class="caption hidden" role="status" aria-live="polite">
+  <div class="cap-top">
+    <span id="capChapter" class="cap-chapter"></span>
+    <span id="capLevel" class="cap-level"></span>
+  </div>
+  <p id="capText" class="cap-text"></p>
+  <div class="cap-controls">
+    <button id="backBtn" class="btn ghost" aria-label="Previous step">&larr;</button>
+    <div id="dots" class="dots" aria-hidden="true"></div>
+    <button id="nextBtn" class="btn primary">Next &darr;</button>
+  </div>
+</div>
+
+<button id="resumeBtn" class="resume hidden">Resume tour</button>
+
+<button id="soundToggle" class="icon-btn" aria-label="Toggle sound" aria-pressed="false">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+    <path class="spk" d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+    <path class="wave" d="M16 9c1.2 1 1.2 5 0 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line class="mut" x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<button id="srcBtn" class="icon-btn src" aria-label="Sources and notes">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="10.6" x2="12" y2="16.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.8" r="1.15" fill="currentColor"/>
+  </svg>
+</button>
+
+<div id="sources" class="overlay hidden">
+  <div class="card src-card">
+    <h2>Sources &amp; notes</h2>
+    <p class="src-note">Chains and coordinates follow Wikipedia's “Recursive islands and lakes” list, cross-checked against the sources below. Satellite imagery: Esri World Imagery. “Largest” means largest catalogued so far, not a proven record.</p>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Recursive_islands_and_lakes" target="_blank" rel="noopener">Recursive islands and lakes (Wikipedia)</a></li>
+      <li><a href="https://www.iflscience.com/vulcan-point-the-island-in-a-lake-on-an-island-in-a-lake-on-an-island-67268" target="_blank" rel="noopener">Vulcan Point (IFLScience)</a></li>
+      <li><a href="https://science.nasa.gov/earth/earth-observatory/volcano-island-of-taal-85670/" target="_blank" rel="noopener">Taal, pre-eruption (NASA Earth Observatory)</a></li>
+      <li><a href="https://www.atlasobscura.com/articles/moose-boulder-debunked" target="_blank" rel="noopener">The Moose Boulder hoax (Atlas Obscura)</a></li>
+      <li><a href="https://www.npr.org/2020/03/13/815546895/the-lonely-non-island-unfortunately-moose-boulder-doesnt-exist" target="_blank" rel="noopener">Moose Boulder debunked (NPR)</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Lake_Sidihoni" target="_blank" rel="noopener">Lake Sidihoni (Wikipedia)</a></li>
+    </ul>
+    <p class="src-note">Taal's crater changed in the January 2020 eruption; that chapter says so on the map. Nothing here is stored; the tour is the whole app.</p>
+    <button id="srcClose" class="btn primary">Back to the map</button>
+  </div>
+</div>
+
+<script src="vendor/leaflet.js"></script>
+<script src="app.js?v=4"></script>
+</body>
+</html>
